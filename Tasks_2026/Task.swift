@@ -11,4 +11,6 @@ struct Task: Identifiable {
     let id = UUID()
     var title: String
     var category: String
+    var dueDate: Date
+    var isCompleted: Bool
 }

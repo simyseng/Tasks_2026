@@ -20,6 +20,9 @@ struct TaskDetailView: View {
                 .foregroundStyle(.secondary)
 
             Spacer()
+            
+            Text("Due: \(task.dueDate.formatted(date: .long, time: .omitted))")
+            Text(task.isCompleted ? "✅ Completed" : "⭕ Not completed")
         }
         .padding()
         .navigationTitle("Details")
