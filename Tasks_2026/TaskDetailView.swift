@@ -20,9 +20,6 @@ struct TaskDetailView: View {
                 .foregroundStyle(.secondary)
 
             Text("Due: \(task.dueDate.formatted(date: .long, time: .omitted))")
-            Text(task.isCompleted ? "✅ Completed" : "⭕ Not completed")
-                .foregroundStyle(.secondary)
-
             Toggle("Completed", isOn: $task.isCompleted)
                 .padding(.top, 10)
 
