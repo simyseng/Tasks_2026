@@ -20,16 +20,13 @@ struct TaskDetailView: View {
                 .foregroundStyle(.secondary)
 
             Text("Due: \(task.dueDate.formatted(date: .long, time: .omitted))")
-<<<<<<< Updated upstream
             Text(task.isCompleted ? "✅ Completed" : "⭕ Not completed")
-=======
                 .foregroundStyle(.secondary)
 
             Toggle("Completed", isOn: $task.isCompleted)
                 .padding(.top, 10)
 
             Spacer()
->>>>>>> Stashed changes
         }
         .padding()
         .navigationTitle("Details")
