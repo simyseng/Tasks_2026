@@ -23,17 +23,18 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(tasks) { task in
+                ForEach(tasks.indices, id: \.self) { index in
                     NavigationLink {
-                        TaskDetailView(task: task)
+                        TaskDetailView(task: $tasks[index])
                     } label: {
+                        let task = tasks[index]
                         VStack(alignment: .leading, spacing: 4) {
                             Text(task.title).font(.headline)
                             Text("\(task.category) • Due \(task.dueDate.formatted(date: .abbreviated, time: .omitted))")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
+                                .font(.caption).foregroundStyle(.secondary)
+                            Text(task.isCompleted ? "✅ Completed" : "⭕ Not completed")
 
+                        }
                     }
                 }
             }

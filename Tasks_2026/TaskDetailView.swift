@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct TaskDetailView: View {
-    let task: Task
+    @Binding var task: Task
 
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(alignment: .leading, spacing: 12) {
             Text(task.title)
                 .font(.title2)
                 .fontWeight(.bold)
@@ -19,9 +19,17 @@ struct TaskDetailView: View {
             Text("Category: \(task.category)")
                 .foregroundStyle(.secondary)
 
-            Spacer()
             Text("Due: \(task.dueDate.formatted(date: .long, time: .omitted))")
+<<<<<<< Updated upstream
             Text(task.isCompleted ? "✅ Completed" : "⭕ Not completed")
+=======
+                .foregroundStyle(.secondary)
+
+            Toggle("Completed", isOn: $task.isCompleted)
+                .padding(.top, 10)
+
+            Spacer()
+>>>>>>> Stashed changes
         }
         .padding()
         .navigationTitle("Details")
