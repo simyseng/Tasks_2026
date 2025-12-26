@@ -10,25 +10,26 @@ import SwiftUI
 struct TaskDetailView: View {
     @Binding var task: Task
 
+    private let categories = ["School", "Personal", "CCA"]
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(task.title)
-                .font(.title2)
-                .fontWeight(.bold)
-
-            Text("Category: \(task.category)")
-                .foregroundStyle(.secondary)
-
-            Text("Due: \(task.dueDate.formatted(date: .long, time: .omitted))")
-                .foregroundStyle(.secondary)
-
-            Toggle("Completed", isOn: $task.isCompleted)
-                .padding(.top, 10)
-
-            Spacer()
+        Form {
+            Section("Task") {
+                TextField("Title", text: $task.title)
+                    .textInputAutocapitalization(.sentences)
+                
+                Picker("Category", selection: $task.category) {
+                    ForEach(categories, id: \.self) { c in
+                        Text(c).tag(c)
+                    }
+                }
+                
+                DatePicker("Due Date", selection: $task.dueDate, displayedComponents: .date)
+            }
+            
+            Section("Status") {
+                Toggle("Completed", isOn: $task.isCompleted)
+            }
         }
-        .padding()
-        .navigationTitle("Details")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
