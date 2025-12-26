@@ -27,16 +27,7 @@ struct ContentView: View {
                     NavigationLink {
                         TaskDetailView(task: $tasks[index])
                     } label: {
-                        let task = tasks[index]
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack {
-                                Text(task.isCompleted ? "✅" : "⭕")
-                                Text(task.title).font(.headline)
-                            }
-                            
-                            Text("\(task.category) • Due \(task.dueDate.formatted(date: .abbreviated, time: .omitted))")
-                                .font(.caption).foregroundStyle(.secondary)
-                        }
+                        TaskRow(task: tasks[index])
                     }
                 }
             }
