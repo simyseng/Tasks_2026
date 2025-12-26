@@ -30,7 +30,6 @@ struct ContentView: View {
                         let task = tasks[index]
                         HStack {
                             Text(task.isCompleted ? "✅" : "⭕")
-                            
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(task.title).font(.headline)                                
                                 Text("\(task.category) • Due \(task.dueDate.formatted(date: .abbreviated, time: .omitted))")
