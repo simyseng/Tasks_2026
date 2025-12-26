@@ -10,32 +10,63 @@ import SwiftUI
 struct ContentView: View {
     @State private var tasks: [Task] = [
         Task(title: "Finish Maths Homework", category: "School",
-                 dueDate: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now,
-                 isCompleted: false),
-            Task(title: "Pack PE Attire", category: "Personal",
-                 dueDate: Calendar.current.date(byAdding: .day, value: 2, to: .now) ?? .now,
-                 isCompleted: true),
-            Task(title: "Practise Piano", category: "CCA",
-                 dueDate: Calendar.current.date(byAdding: .day, value: 3, to: .now) ?? .now,
-                 isCompleted: false)
+             dueDate: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now,
+             isCompleted: false),
+        Task(title: "Pack PE Attire", category: "Personal",
+             dueDate: Calendar.current.date(byAdding: .day, value: 2, to: .now) ?? .now,
+             isCompleted: true),
+        Task(title: "Practise Piano", category: "CCA",
+             dueDate: Calendar.current.date(byAdding: .day, value: 3, to: .now) ?? .now,
+             isCompleted: false)
     ]
 
     var body: some View {
         NavigationStack {
             List {
-                ForEach(tasks.indices, id: \.self) { index in
-                    NavigationLink {
-                        TaskDetailView(task: $tasks[index])
+                Section("My Tasks") {
+                    ForEach(tasks.indices, id: \.self) { index in
+                        NavigationLink {
+                            TaskDetailView(task: $tasks[index])
+                        } label: {
+                            TaskRow(task: tasks[index])
+                        }
+                    }
+                    .onDelete(perform: deleteTasks)   // ✅ swipe to delete
+                }
+            }
+            .listStyle(.insetGrouped)
+            .navigationTitle("Tasks")
+            .toolbar {
+                // ✅ iOS built-in "Edit" button (turns on delete/reorder UI)
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
+
+                // ✅ "+" button to add a new row
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        addTask()
                     } label: {
-                        TaskRow(task: tasks[index])
+                        Image(systemName: "plus")
                     }
                 }
             }
-            .navigationTitle("Tasks")
         }
+    }
+
+    // MARK: - Actions
+
+    private func addTask() {
+        let newTask = Task.newDefaultTask(number: tasks.count + 1)
+        tasks.append(newTask)
+    }
+
+    private func deleteTasks(at offsets: IndexSet) {
+        tasks.remove(atOffsets: offsets)
     }
 }
 
 #Preview {
     ContentView()
 }
+

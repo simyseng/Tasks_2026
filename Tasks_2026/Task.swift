@@ -13,4 +13,13 @@ struct Task: Identifiable {
     var category: String
     var dueDate: Date
     var isCompleted: Bool
+    
+    static func newDefaultTask(number: Int) -> Task {
+        Task(
+            title: "New Task \(number)",
+            category: "Personal",
+            dueDate: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now,
+            isCompleted: false
+        )
+    }
 }
