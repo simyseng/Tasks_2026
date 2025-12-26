@@ -8,20 +8,16 @@
 import SwiftUI
 
 struct TaskDetailView: View {
-    @Binding var task: Task
+    let task: Task
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(spacing: 12) {
             Text(task.title)
                 .font(.title2)
                 .fontWeight(.bold)
 
             Text("Category: \(task.category)")
                 .foregroundStyle(.secondary)
-
-            Text("Due: \(task.dueDate.formatted(date: .long, time: .omitted))")
-            Toggle("Completed", isOn: $task.isCompleted)
-                .padding(.top, 10)
 
             Spacer()
             
