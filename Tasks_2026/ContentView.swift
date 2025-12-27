@@ -51,10 +51,36 @@ struct ContentView: View {
                     }
                 }
             }
+            .onAppear {
+                loadTasksIfNeeded()
+            }
+            .onChange(of: tasks) { _, newValue in
+                TaskStore.save(newValue)
+            }
         }
     }
-
+    
     // MARK: - Actions
+    
+    private func loadTasksIfNeeded() {
+            let saved = TaskStore.load()
+            if saved.isEmpty {
+                // First run: load default sample tasks
+                tasks = [
+                    Task(title: "Finish Maths Homework", category: "School",
+                         dueDate: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now,
+                         isCompleted: false),
+                    Task(title: "Pack PE Attire", category: "Personal",
+                         dueDate: Calendar.current.date(byAdding: .day, value: 2, to: .now) ?? .now,
+                         isCompleted: true),
+                    Task(title: "Practise Piano", category: "CCA",
+                         dueDate: Calendar.current.date(byAdding: .day, value: 3, to: .now) ?? .now,
+                         isCompleted: false)
+                ]
+            } else {
+                tasks = saved
+            }
+        }
 
     private func addTask() {
         let newTask = Task.newDefaultTask(number: tasks.count + 1)
