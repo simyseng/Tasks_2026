@@ -28,6 +28,7 @@ struct TaskRow: View {
             Spacer()
         }
         .padding(.vertical, 6)
+        .opacity(task.isCompleted ? 0.5 : 1.0)
     }
 }
 
