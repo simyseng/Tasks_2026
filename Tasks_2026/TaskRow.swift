@@ -17,7 +17,10 @@ struct TaskRow: View {
                 .foregroundStyle(task.isCompleted ? .green : .gray)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(task.title).font(.headline)
+                Text(task.title)
+                    .font(.headline)
+                    .strikethrough(task.isCompleted)
+                    .foregroundStyle(task.isCompleted ? .gray : .primary)
                 Text("\(task.category) • Due \(task.dueDate.formatted(date: .abbreviated, time: .omitted))")
                     .font(.caption)
                     .foregroundStyle(.secondary)
