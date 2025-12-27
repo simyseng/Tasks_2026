@@ -31,7 +31,7 @@ struct ContentView: View {
                             TaskRow(task: tasks[index])
                         }
                     }
-                    .onDelete(perform: deleteTasks)   
+                    .onDelete(perform: deleteTasks)
                 }
             }
             .listStyle(.insetGrouped)
@@ -58,7 +58,10 @@ struct ContentView: View {
 
     private func addTask() {
         let newTask = Task.newDefaultTask(number: tasks.count + 1)
-        tasks.append(newTask)
+        
+        withAnimation {
+            tasks.append(newTask)
+        }
     }
 
     private func deleteTasks(at offsets: IndexSet) {
