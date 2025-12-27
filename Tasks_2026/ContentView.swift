@@ -42,7 +42,7 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                loadTasksIfNeeded()
+                tasks = TaskStore.load()
             }
             .onChange(of: tasks) { _, newValue in
                 TaskStore.save(newValue)
@@ -51,20 +51,6 @@ struct ContentView: View {
     }
     
     // MARK: - Actions
-    
-    private func loadTasksIfNeeded() {
-            let saved = TaskStore.load()
-            if saved.isEmpty {
-                // First run: load default sample tasks
-                tasks = [
-                    Task(title: "New Task", category: "Personal",
-                         dueDate: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now,
-                         isCompleted: false)
-                ]
-            } else {
-                tasks = saved
-            }
-        }
 
     private func addTask() {
         let newTask = Task.newDefaultTask(number: tasks.count + 1)
