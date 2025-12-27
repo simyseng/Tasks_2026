@@ -8,18 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var tasks: [Task] = [
-        Task(title: "Finish Maths Homework", category: "School",
-             dueDate: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now,
-             isCompleted: false),
-        Task(title: "Pack PE Attire", category: "Personal",
-             dueDate: Calendar.current.date(byAdding: .day, value: 2, to: .now) ?? .now,
-             isCompleted: true),
-        Task(title: "Practise Piano", category: "CCA",
-             dueDate: Calendar.current.date(byAdding: .day, value: 3, to: .now) ?? .now,
-             isCompleted: false)
-    ]
-
+    @State private var tasks: [Task] = []
+    
     var body: some View {
         NavigationStack {
             List {
@@ -67,14 +57,8 @@ struct ContentView: View {
             if saved.isEmpty {
                 // First run: load default sample tasks
                 tasks = [
-                    Task(title: "Finish Maths Homework", category: "School",
+                    Task(title: "New Task", category: "Personal",
                          dueDate: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now,
-                         isCompleted: false),
-                    Task(title: "Pack PE Attire", category: "Personal",
-                         dueDate: Calendar.current.date(byAdding: .day, value: 2, to: .now) ?? .now,
-                         isCompleted: true),
-                    Task(title: "Practise Piano", category: "CCA",
-                         dueDate: Calendar.current.date(byAdding: .day, value: 3, to: .now) ?? .now,
                          isCompleted: false)
                 ]
             } else {

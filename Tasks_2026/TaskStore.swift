@@ -8,7 +8,7 @@
 import Foundation
 
 struct TaskStore {
-    private static let key = "saved_tasks_v1"
+    private static let key = "saved_tasks"
 
     static func save(_ tasks: [Task]) {
         do {
