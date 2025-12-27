@@ -31,7 +31,7 @@ struct ContentView: View {
                             TaskRow(task: tasks[index])
                         }
                     }
-                    .onDelete(perform: deleteTasks)   // ✅ swipe to delete
+                    .onDelete(perform: deleteTasks)   
                 }
             }
             .listStyle(.insetGrouped)
