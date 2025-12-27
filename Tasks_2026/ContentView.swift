@@ -19,8 +19,11 @@ struct ContentView: View {
             List {
                 ForEach(tasks) { task in
                     VStack(alignment: .leading) {
-                        Text(task.title).font(.headline)
-                        Text(task.category).font(.caption).foregroundStyle(.secondary)
+                        Text(task.title)
+                            .font(.headline)
+                        Text(task.category)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                     }
                 }
             }
