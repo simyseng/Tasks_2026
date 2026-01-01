@@ -37,12 +37,10 @@ struct ContentView: View {
             .listStyle(.insetGrouped)
             .navigationTitle("Tasks")
             .toolbar {
-                // ✅ iOS built-in "Edit" button (turns on delete/reorder UI)
                 ToolbarItem(placement: .topBarLeading) {
                     EditButton()
                 }
 
-                // ✅ "+" button to add a new row
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         addTask()
