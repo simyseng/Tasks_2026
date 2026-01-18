@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import SwiftData // Added new line
 
-struct Task: Identifiable, Codable, Equatable {
-    let id: UUID
+@Model
+class Task /*: Identifiable, Codable, Equatable */ {
+    var id: UUID
     var title: String
     var category: String
     var dueDate: Date
     var isCompleted: Bool
 
-    init(id: UUID = UUID(),
+    init(id: UUID,
          title: String,
          category: String,
          dueDate: Date,
@@ -28,6 +30,7 @@ struct Task: Identifiable, Codable, Equatable {
 
     static func newDefaultTask(number: Int) -> Task {
         Task(
+            id: UUID(),
             title: "New Task \(number)",
             category: "Personal",
             dueDate: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now,

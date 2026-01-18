@@ -6,33 +6,33 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    @State private var tasks: [Task] = []
+    @Query var tasks: [Task] = []
+    @Environment(\.modelContext) var modelContext
     
     var body: some View {
         NavigationStack {
             List {
                 Section("My Tasks") {
-                    ForEach(tasks.indices, id: \.self) { index in
+                    ForEach(tasks) { task in
                         NavigationLink {
-                            TaskDetailView(task: $tasks[index])
+                            TaskDetailView(task: task)
                         } label: {
-                            TaskRow(task: tasks[index])
+                            TaskRow(task: task)
                         }
                     }
-                    .onDelete(perform: deleteTasks)
+                  //  .onDelete(perform: deleteTasks)
                 }
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Tasks")
             .toolbar {
-                // ✅ iOS built-in "Edit" button (turns on delete/reorder UI)
                 ToolbarItem(placement: .topBarLeading) {
                     EditButton()
                 }
 
-                // ✅ "+" button to add a new row
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         addTask()
@@ -40,12 +40,6 @@ struct ContentView: View {
                         Image(systemName: "plus")
                     }
                 }
-            }
-            .onAppear {
-                tasks = TaskStore.load()
-            }
-            .onChange(of: tasks) { _, newValue in
-                TaskStore.save(newValue)
             }
         }
     }
@@ -56,15 +50,15 @@ struct ContentView: View {
         let newTask = Task.newDefaultTask(number: tasks.count + 1)
         
         withAnimation {
-            tasks.append(newTask)
+            modelContext.insert(newTask)
         }
     }
-
+/*
     private func deleteTasks(at offsets: IndexSet) {
-        tasks.remove(atOffsets: offsets)
+        modelContext.remove(atOffsets: offsets)
     }
 }
-
+*/
 #Preview {
     ContentView()
 }

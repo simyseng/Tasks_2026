@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TaskDetailView: View {
     @Binding var task: Task
