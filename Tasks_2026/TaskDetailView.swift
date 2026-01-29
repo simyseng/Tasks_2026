@@ -9,16 +9,20 @@ import SwiftUI
 
 struct TaskDetailView: View {
     @Binding var task: Task
+    let categories = ["School", "Personal"]
 
     var body: some View {
         Form {
             Section("Task Info"){
                 TextField("Title:", text: $task.title)
-                TextField("Category", text: $task.category)
+                Picker("Category", selection: $task.category) {
+                    ForEach(categories, id:\.self) { c in
+                        Text(c).tag(c)
+                    }
+                }
             }
             Section("Status") {
-                DatePicker("Due", selection: $task.dueDate)
-                    .displayedComponents(.date)
+                DatePicker("Due", selection: $task.dueDate, displayedComponents: .date)
                 Toggle("Due Date", isOn: $task.isCompleted)
             }
             
