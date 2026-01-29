@@ -22,20 +22,18 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(tasks) { task in
-                    NavigationLink {
-                        TaskDetailView(task: task)
-                    } label: {
-                        HStack {
-                            Text(task.isCompleted ? "✅" : "⭕")
-                        }
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(task.title).font(.headline)
-                            Text("\(task.category) • Due \(task.dueDate.formatted(date: .abbreviated, time: .omitted))")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
+            List ($tasks){ $task in
+                NavigationLink {
+                    TaskDetailView(task: $task)
+                } label: {
+                    HStack {
+                        Text(task.isCompleted ? "✅" : "⭕")
+                    }
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(task.title).font(.headline)
+                        Text("\(task.category) • Due \(task.dueDate.formatted(date: .abbreviated, time: .omitted))")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                     }
                 }
             }

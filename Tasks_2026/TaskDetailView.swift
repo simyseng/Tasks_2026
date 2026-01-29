@@ -8,24 +8,32 @@
 import SwiftUI
 
 struct TaskDetailView: View {
-    let task: Task
+    @Binding var task: Task
 
     var body: some View {
-        VStack(spacing: 12) {
-            Text(task.title)
-                .font(.title2)
-                .fontWeight(.bold)
-
-            Text("Category: \(task.category)")
-                .foregroundStyle(.secondary)
-
-            Spacer()
+        Form {
+            Section("Task Info"){
+                TextField("Title:", text: $task.title)
+                TextField("Category", text: $task.category)
+            }
+            Section("Status") {
+                DatePicker("Due", selection: $task.dueDate)
+                    .displayedComponents(.date)
+                Toggle("Due Date", isOn: $task.isCompleted)
+            }
             
-            Text("Due: \(task.dueDate.formatted(date: .long, time: .omitted))")
-            Text(task.isCompleted ? "✅ Completed" : "⭕ Not completed")
         }
         .padding()
         .navigationTitle("Details")
         .navigationBarTitleDisplayMode(.inline)
     }
+}
+
+#Preview {
+    TaskDetailView(task: .constant(Task(
+        title: "HW 1",
+        category: "School",
+        dueDate: Date(),
+        isCompleted: false
+    )))
 }
