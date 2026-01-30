@@ -33,3 +33,7 @@ struct TaskDetailView: View {
         }
     }
 }
+
+#Preview {
+    TaskDetailView(task: .constant(Task(title:"Maths Homework", category: "School", dueDate: Date(), isCompleted: false)))
+}
