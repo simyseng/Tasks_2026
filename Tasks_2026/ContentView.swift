@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
 //  Tasks_2026
-//
-//  Created by Stanley Sim on 26/12/25.
+//  This branch rewrite Lesson 8 to use SwiftData.
+//  Created by Stanley Sim on 31/1/26.
 //
 
 import SwiftUI
