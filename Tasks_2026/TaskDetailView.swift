@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct TaskDetailView: View {
-    @Binding var task: Task
+    @Bindable var task: Task
 
     private let categories = ["School", "Personal", "CCA"]
 
@@ -36,5 +36,11 @@ struct TaskDetailView: View {
 }
 
 #Preview {
-    TaskDetailView(task: .constant(Task(id: UUID(), title: "Maths Homework", category: "School", dueDate: Date(), isCompleted: false)))
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container: ModelContainer = try! ModelContainer(for: Task.self, configurations: config)
+
+    ContentView()
+        .modelContainer(container)
 }
+
+

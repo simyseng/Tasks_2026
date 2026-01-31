@@ -9,14 +9,14 @@ import Foundation
 import SwiftData // Added new line
 
 @Model
-class Task /*: Identifiable, Codable, Equatable */ {
+class Task {
     var id: UUID
     var title: String
     var category: String
     var dueDate: Date
     var isCompleted: Bool
 
-    init(id: UUID,
+    init(id: UUID = UUID(),
          title: String,
          category: String,
          dueDate: Date,
@@ -30,7 +30,6 @@ class Task /*: Identifiable, Codable, Equatable */ {
 
     static func newDefaultTask(number: Int) -> Task {
         Task(
-            id: UUID(),
             title: "New Task \(number)",
             category: "Personal",
             dueDate: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now,

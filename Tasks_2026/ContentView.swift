@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Query var tasks: [Task] = []
+    @Query var tasks: [Task]
     @Environment(\.modelContext) var modelContext
     
     var body: some View {
@@ -23,7 +23,7 @@ struct ContentView: View {
                             TaskRow(task: task)
                         }
                     }
-                  //  .onDelete(perform: deleteTasks)
+                    .onDelete(perform: deleteTasks)
                 }
             }
             .listStyle(.insetGrouped)
@@ -44,8 +44,6 @@ struct ContentView: View {
         }
     }
     
-    // MARK: - Actions
-
     private func addTask() {
         let newTask = Task.newDefaultTask(number: tasks.count + 1)
         
@@ -53,13 +51,17 @@ struct ContentView: View {
             modelContext.insert(newTask)
         }
     }
-/*
+
     private func deleteTasks(at offsets: IndexSet) {
-        modelContext.remove(atOffsets: offsets)
+        for index in offsets {
+            modelContext.delete(tasks[index])
+        }
+
     }
 }
-*/
+
 #Preview {
     ContentView()
+        .modelContainer(for: Task.self, inMemory: true)
 }
 
