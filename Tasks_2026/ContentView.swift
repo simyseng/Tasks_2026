@@ -41,6 +41,11 @@ struct ContentView: View {
                     }
                 }
             }
+            .onAppear() {
+                if tasks.isEmpty {
+                    addTask()
+                }
+            }
         }
     }
     
