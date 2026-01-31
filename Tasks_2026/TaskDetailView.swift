@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct TaskDetailView: View {
     @Bindable var task: Task
@@ -24,7 +23,6 @@ struct TaskDetailView: View {
                         Text(c).tag(c)
                     }
                 }
-                
                 DatePicker("Due Date", selection: $task.dueDate, displayedComponents: .date)
             }
             
@@ -36,11 +34,7 @@ struct TaskDetailView: View {
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container: ModelContainer = try! ModelContainer(for: Task.self, configurations: config)
-
-    ContentView()
-        .modelContainer(container)
+    TaskDetailView(task: Task(title:"Maths Homework", category: "School", dueDate: Date(), isCompleted: false))
 }
 
 

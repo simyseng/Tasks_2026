@@ -28,3 +28,9 @@ struct TaskRow: View {
     }
 }
 
+#Preview {
+    TaskRow(task: Task(title: "Maths Homework", category: "School", dueDate: Date(), isCompleted: true))
+        .padding()
+    
+}
+
