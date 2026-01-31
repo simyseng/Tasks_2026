@@ -34,3 +34,7 @@ struct TaskDetailView: View {
         }
     }
 }
+
+#Preview {
+    TaskDetailView(task: .constant(Task(id: UUID(), title: "Maths Homework", category: "School", dueDate: Date(), isCompleted: false)))
+}
