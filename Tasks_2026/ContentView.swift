@@ -9,8 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Query var tasks: [Task]
     @Environment(\.modelContext) var modelContext
+    @Query var tasks: [Task]
     
     var body: some View {
         NavigationStack {
