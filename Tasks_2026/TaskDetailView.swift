@@ -29,3 +29,7 @@ struct TaskDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+#Preview {
+    TaskDetailView(task: Task(title: "Maths Homework", category: "School", dueDate: Date(), isCompleted: false))
+}
