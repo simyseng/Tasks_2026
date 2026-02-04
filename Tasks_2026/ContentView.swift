@@ -24,23 +24,21 @@ struct ContentView: View {
         NavigationStack {
             List {
                 ForEach($tasks) { $task in
-                    let t = $task.wrappedValue
-                    NavigationLink {
-                        TaskDetailView(task: $task)
-                    } label: {
+                    NavigationLink(destination: TaskDetailView(task: $task)) {
                         HStack {
-                            Text(t.isCompleted ? "✅" : "⭕")
+                            Text(task.isCompleted ? "✅" : "❌")
+                            VStack(alignment: .leading) {
+                                Text(task.title)
+                                    .font(.headline)
+                                Text("\(task.category) • \(task.dueDate.formatted(date: .abbreviated, time: .omitted))")
+                                    .font(.caption)
+                                    .foregroundStyle(Color.secondary)
+                            }
                         }
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(t.title).font(.headline)
-                            Text("\(t.category) • Due \(t.dueDate.formatted(date: .abbreviated, time: .omitted))")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
+                        
                     }
                 }
-            }
-            .navigationTitle("Tasks")
+            }.navigationTitle("Tasks")
         }
     }
 }
