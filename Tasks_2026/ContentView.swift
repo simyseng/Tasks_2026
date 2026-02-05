@@ -27,7 +27,7 @@ struct ContentView: View {
                     NavigationLink {
                         TaskDetailView(task: $tasks[index])
                     } label: {
-                        TaskRow(task: tasks[index])
+                        TaskRow(task: $tasks[index])
                     }
                 }
             }
