@@ -27,8 +27,11 @@ struct TaskRow: View {
             }
             Spacer()
         }
-        .padding(.vertical, 6)
+        .padding(12)
         .opacity(task.isCompleted ? 0.5 : 1.0)
     }
 }
 
+#Preview {
+    TaskRow(task: Task(title: "Maths Homework", category: "School", dueDate: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now, isCompleted: false))
+}
