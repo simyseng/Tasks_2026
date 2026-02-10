@@ -19,7 +19,7 @@ struct TaskRow: View {
                     task.isCompleted.toggle()
                 }
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading) {
                 Text(task.title)
                     .font(.headline)
                     .strikethrough(task.isCompleted)
