@@ -23,11 +23,11 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(tasks.indices, id: \.self) { index in
+                ForEach($tasks) { $task in
                     NavigationLink {
-                        TaskDetailView(task: $tasks[index])
+                        TaskDetailView(task: $task)
                     } label: {
-                        TaskRow(task: tasks[index])
+                        TaskRow(task: task)
                     }
                 }
             }
