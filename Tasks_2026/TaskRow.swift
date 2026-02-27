@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct TaskRow: View {
-    let task: Task
+    @Binding var task: Task
 
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
                 .font(.title3)
                 .foregroundStyle(task.isCompleted ? .green : .gray)
+                .onTapGesture {
+                    task.isCompleted.toggle()
+                }
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(task.title).font(.headline)
@@ -28,3 +31,6 @@ struct TaskRow: View {
     }
 }
 
+#Preview {
+    TaskRow(task: .constant(Task(title: "Maths HW", category: "School", dueDate: Date(), isCompleted: false)))
+}
