@@ -14,31 +14,14 @@ struct ContentView: View {
         NavigationStack {
             List {
                 Section("My Tasks") {
-                    ForEach(tasks.indices, id: \.self) { index in
+                    ForEach($tasks) { $task in
                         NavigationLink {
-                            TaskDetailView(task: $tasks[index])
+                            TaskDetailView(task: $task)
                         } label: {
-                            TaskRow(task: tasks[index])
+                            TaskRow(task: task)
                         }
                     }
-                    .onDelete(perform: deleteTasks)
-                }
-            }
-            .listStyle(.insetGrouped)
-            .navigationTitle("Tasks")
-            .toolbar {
-                // ✅ iOS built-in "Edit" button (turns on delete/reorder UI)
-                ToolbarItem(placement: .topBarLeading) {
-                    EditButton()
-                }
-
-                // ✅ "+" button to add a new row
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        addTask()
-                    } label: {
-                        Image(systemName: "plus")
-                    }
+                    .onDelete(perform: deleteTask)
                 }
             }
             .onAppear {
@@ -47,11 +30,24 @@ struct ContentView: View {
             .onChange(of: tasks) { _, newValue in
                 TaskStore.save(newValue)
             }
+            .listStyle(.insetGrouped)
+            .navigationTitle("Tasks")
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
+
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        addTask()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
         }
     }
     
-    // MARK: - Actions
-
     private func addTask() {
         let newTask = Task.newDefaultTask(number: tasks.count + 1)
         
@@ -60,7 +56,7 @@ struct ContentView: View {
         }
     }
 
-    private func deleteTasks(at offsets: IndexSet) {
+    private func deleteTask(at offsets: IndexSet) {
         tasks.remove(atOffsets: offsets)
     }
 }
